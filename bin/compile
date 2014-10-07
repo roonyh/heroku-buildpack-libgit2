@@ -49,6 +49,7 @@ fi
 
 # debug
 topic "Checking libgit2"
+set
 pushd $BUILD_DIR/.libgit2
 cat <<EOF > test.c
 #include <stdio.h>
