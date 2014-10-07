@@ -6,7 +6,6 @@ set -e
 BUILD_DIR=$1
 CACHE_DIR=$2
 APT_DIR=$HOME/vendor/apt
-ls -R $APT_DIR
 
 function topic() {
   echo "-----> $*"
@@ -39,6 +38,7 @@ if [[ ! -f $CACHE_DIR/usr/lib/libgit2.so.0.21.0 ]]; then
   topic "Building / Installing libgit2"
   cd libgit2-*
   mkdir build && cd build
+  mkdir -p $CACHE_DIR/.libgit2/usr
   cmake .. -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/.libgit2/usr/
   cmake --build . --target install
 
