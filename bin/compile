@@ -7,6 +7,10 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 APT_DIR=$HOME/vendor/apt
 
+function topic() {
+  echo "-----> $*"
+}
+
 # Update env
 export PATH=$APT_DIR/usr/bin:$PATH
 export INCLUDE_PATH=$APT_DIR/usr/include:$INCLUDE_PATH
