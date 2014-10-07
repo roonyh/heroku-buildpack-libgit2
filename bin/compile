@@ -13,12 +13,12 @@ function topic() {
 
 # Update env
 export PATH=$APT_DIR/usr/bin:$PATH
-export INCLUDE_PATH=$APT_DIR/usr/include:$INCLUDE_PATH
+export INCLUDE_PATH=/app/vendor/apt/usr/include:$APT_DIR/usr/include:$INCLUDE_PATH
 export INCLUDE=$INCLUDE_PATH
 export C_INCLUDE_PATH=$INCLUDE_PATH
 export CPP_INCLUDE_PATH=$INCLUDE_PATH
-export LIBRARY_PATH=$APT_DIR/usr/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=$APT_DIR/usr/lib:$LIBRARY_PATH
+export LIBRARY_PATH=/app/vendor/apt/usr/lib:$APT_DIR/usr/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/app/vendor/apt/usr/lib:$APT_DIR/usr/lib:$LIBRARY_PATH
 hash -r
 
 # install libgit2
