@@ -22,31 +22,32 @@ export LD_LIBRARY_PATH=$APT_DIR/usr/lib:$LIBRARY_PATH
 hash -r
 
 # install libgit2
-if [ ! -f $APT_DIR/usr/lib/libgit2.so.21 ]; then
+if [[ ! -f $CACHE_DIR/.libgit2/libgit2.so.0.21.0 ]]; then
   topic "Downloading libgit2 source"
   curl -L -o $CACHE_DIR/libgit2.tar.gz https://github.com/libgit2/libgit2/archive/v0.21.1.tar.gz
 
-  topic "Building libgit2"
   mkdir -p $BUILD_DIR/.libgit2
+  mkdir -p $CACHE_DIR/.libgit2
+  pushd $BUILD_DIR/.libgit2
 
   topic "Extracting archive"
-  pushd $BUILD_DIR/.libgit2
   tar xf $CACHE_DIR/libgit2.tar.gz
+
+  topic "Building / Installing libgit2"
   cd libgit2-*
   mkdir build && cd build
   cmake .. -DCMAKE_INSTALL_PREFIX=$APT_DIR/usr/
   cmake --build . --target install
 
-  topic "Installing libgit2"
-  mkdir -p $APT_DIR/usr/include/
-  cp -r ../include/* $APT_DIR/usr/include/
+  topic "Caching libgit2.so.0.21.0"
+  cp $APT_DIR/usr/lib/libgit2.so.0.21.0 $CACHE_DIR/.libgit2/libgit2.so.0.21.0
 
   popd
 fi
 
 # debug
 topic "Checking libgit2"
-pushd $BUILD_DIR
+pushd $BUILD_DIR/.libgit2
 cat <<EOF > test.c
 #include <stdio.h>
 #include <git2/version.h>
