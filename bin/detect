@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Usage: bin/detect <build-dir>
+
+echo "libgit2"
+exit 0
