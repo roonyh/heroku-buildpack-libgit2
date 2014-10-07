@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+APT_DIR=$HOME/vendor/apt
+
+# Update env
+export PATH=$APT_DIR/usr/bin:$PATH
+export INCLUDE_PATH=$APT_DIR/usr/include:$INCLUDE_PATH
+export INCLUDE=$INCLUDE_PATH
+export C_INCLUDE_PATH=$INCLUDE_PATH
+export CPP_INCLUDE_PATH=$INCLUDE_PATH
+export LIBRARY_PATH=$APT_DIR/usr/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$APT_DIR/usr/lib:$LIBRARY_PATH
+hash -r
+
+# install libgit2
+if [ ! -f $APT_DIR/usr/lib/libgit2.so.21 ]; then
+  topic "Downloading libgit2 source"
+  curl -L -o $CACHE_DIR/libgit2.tar.gz https://github.com/libgit2/libgit2/archive/v0.21.1.tar.gz
+
+  topic "Building libgit2"
+  mkdir -p $BUILD_DIR/.libgit2
+
+  topic "Extracting archive"
+  pushd $BUILD_DIR/.libgit2
+  tar xf $CACHE_DIR/libgit2.tar.gz
+  cd libgit2-*
+  mkdir build && cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX=$APT_DIR/usr/
+  cmake --build . --target install
+
+  topic "Installing libgit2"
+  mkdir -p $APT_DIR/usr/include/
+  cp -r ../include/* $APT_DIR/usr/include/
+
+  popd
+fi
+
+# debug
+topic "Checking libgit2"
+pushd $BUILD_DIR
+cat <<EOF > test.c
+#include <stdio.h>
+#include <git2/version.h>
+
+int main() {
+#ifdef LIBGIT2_SOVERSION
+  printf("VERSION = %d\n", LIBGIT2_SOVERSION);
+#else
+  printf("LIBGIT2_SOVERSION is not defined\n");
+#endif
+  return 0;
+}
+EOF
+gcc -lgit2 -o test.o test.c || exit 1
+./test.o
+popd
+
+exit 0
