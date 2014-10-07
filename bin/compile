@@ -22,12 +22,14 @@ export LD_LIBRARY_PATH=$APT_DIR/usr/lib:$LIBRARY_PATH
 hash -r
 
 # install libgit2
+
+mkdir -p $BUILD_DIR/.libgit2
+mkdir -p $CACHE_DIR/.libgit2
+
 if [[ ! -f $CACHE_DIR/.libgit2/libgit2.so.0.21.0 ]]; then
   topic "Downloading libgit2 source"
   curl -L -o $CACHE_DIR/libgit2.tar.gz https://github.com/libgit2/libgit2/archive/v0.21.1.tar.gz
 
-  mkdir -p $BUILD_DIR/.libgit2
-  mkdir -p $CACHE_DIR/.libgit2
   pushd $BUILD_DIR/.libgit2
 
   topic "Extracting archive"
