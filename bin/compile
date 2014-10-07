@@ -6,6 +6,7 @@ set -e
 BUILD_DIR=$1
 CACHE_DIR=$2
 APT_DIR=$HOME/vendor/apt
+ls -R $APT_DIR
 
 function topic() {
   echo "-----> $*"
@@ -26,7 +27,7 @@ hash -r
 mkdir -p $BUILD_DIR/.libgit2
 mkdir -p $CACHE_DIR/.libgit2
 
-if [[ ! -f $CACHE_DIR/.libgit2/libgit2.so.0.21.0 ]]; then
+if [[ ! -f $CACHE_DIR/usr/lib/libgit2.so.0.21.0 ]]; then
   topic "Downloading libgit2 source"
   curl -L -o $CACHE_DIR/libgit2.tar.gz https://github.com/libgit2/libgit2/archive/v0.21.1.tar.gz
 
@@ -38,18 +39,17 @@ if [[ ! -f $CACHE_DIR/.libgit2/libgit2.so.0.21.0 ]]; then
   topic "Building / Installing libgit2"
   cd libgit2-*
   mkdir build && cd build
-  cmake .. -DCMAKE_INSTALL_PREFIX=$APT_DIR/usr/
+  cmake .. -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/.libgit2/usr/
   cmake --build . --target install
-
-  topic "Caching libgit2.so.0.21.0"
-  cp $APT_DIR/usr/lib/libgit2.so.0.21.0 $CACHE_DIR/.libgit2/libgit2.so.0.21.0
 
   popd
 fi
 
+topic "Loading cache libgit2"
+cp -r $CACHE_DIR/.libgit2/usr/* $APT_DIR/usr/
+
 # debug
 topic "Checking libgit2"
-set
 pushd $BUILD_DIR/.libgit2
 cat <<EOF > test.c
 #include <stdio.h>
