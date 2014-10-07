@@ -26,7 +26,7 @@ hash -r
 mkdir -p $BUILD_DIR/.libgit2
 mkdir -p $CACHE_DIR/.libgit2
 
-if [[ ! -f $CACHE_DIR/usr/lib/libgit2.so.0.21.0 ]]; then
+if [[ ! -f $CACHE_DIR/.libgit2/usr/lib/libgit2.so.0.21.0 ]]; then
   topic "Downloading libgit2 source"
   curl -L -o $CACHE_DIR/libgit2.tar.gz https://github.com/libgit2/libgit2/archive/v0.21.1.tar.gz
 
