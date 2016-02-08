@@ -3,9 +3,9 @@
 cat <<EOF
 ---
 config_vars:
-  APT_DIR: $HOME/vendor/apt
+  APT_DIR: /app/vendor/apt
   PATH: $APT_DIR/usr/bin:$PATH
-  INCLUDE_PATH: /app/vendor/apt/usr/include:$APT_DIR/usr/include:$INCLUDE_PATH
+  INCLUDE_PATH: /app/vendor/apt/usr/include:$INCLUDE_PATH
   INCLUDE: $INCLUDE_PATH
   C_INCLUDE_PATH: $INCLUDE_PATH
   CPP_INCLUDE_PATH: $INCLUDE_PATH
