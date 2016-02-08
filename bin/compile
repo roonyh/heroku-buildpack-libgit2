@@ -25,6 +25,7 @@ hash -r
 
 mkdir -p $BUILD_DIR/.libgit2
 mkdir -p $CACHE_DIR/.libgit2
+mkdir -p $APT_DIR/usr
 
 if [[ ! -f $CACHE_DIR/.libgit2/usr/lib/libgit2.so.0.21.0 ]]; then
   topic "Downloading libgit2 source"
