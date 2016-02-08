@@ -50,6 +50,7 @@ topic "Loading cache libgit2"
 cp -r $CACHE_DIR/.libgit2/usr/* $APT_DIR/usr/
 echo $APT_DIR
 ls $APT_DIR/usr/
+ls /app/vendor/apt/usr/lib/pkgconfig/
 
 # debug
 topic "Checking libgit2"
