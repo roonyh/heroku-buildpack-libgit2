@@ -4,11 +4,7 @@ cat <<EOF
 ---
 config_vars:
   APT_DIR: /app/vendor/apt
-  PATH: $APT_DIR/usr/bin:$PATH
-  INCLUDE_PATH: /app/vendor/apt/usr/include:$INCLUDE_PATH
-  INCLUDE: $INCLUDE_PATH
-  C_INCLUDE_PATH: $INCLUDE_PATH
-  CPP_INCLUDE_PATH: $INCLUDE_PATH
-  LIBRARY_PATH: /app/vendor/apt/usr/lib:$APT_DIR/usr/lib:$LIBRARY_PATH
-  LD_LIBRARY_PATH: /app/vendor/apt/usr/lib:$APT_DIR/usr/lib:$LIBRARY_PATH
+  PATH: /app/vendor/apt/usr/bin:$PATH
+  LIBRARY_PATH: /app/vendor/apt/usr/lib:$LIBRARY_PATH
+  LD_LIBRARY_PATH: /app/vendor/apt/usr/lib:$LIBRARY_PATH
 EOF
