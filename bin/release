@@ -3,8 +3,6 @@
 cat <<EOF
 ---
 config_vars:
-  APT_DIR: /app/vendor/apt
   PATH: /app/vendor/apt/usr/bin:$PATH
-  LIBRARY_PATH: /app/vendor/apt/usr/lib
-  LD_LIBRARY_PATH: /app/vendor/apt/usr/lib
+  PKG_CONFIG_PATH: /app/vendor/apt/usr/lib/pkgconfig/:PKG_CONFIG_PATH
 EOF
