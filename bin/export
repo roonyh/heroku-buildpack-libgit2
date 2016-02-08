@@ -1,1 +1,0 @@
-export PATH=/app/vendor/apt/usr/lib/pkgconfig/:PKG_CONFIG_PATH
