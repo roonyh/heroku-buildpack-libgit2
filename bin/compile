@@ -50,9 +50,7 @@ topic "Loading cache libgit2"
 cp -r $CACHE_DIR/.libgit2/usr/* $APT_DIR/usr/
 echo $APT_DIR
 ls $APT_DIR/usr/
-ls /app/.heroku/usr/lib/
-ls /app/.heroku/usr/lib/include/
-ls /app/.heroku/usr/lib/pkgconfig/
+ls /app/.heroku/usr/include/
 
 # debug
 topic "Checking libgit2"
