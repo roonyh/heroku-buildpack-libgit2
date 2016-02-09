@@ -5,7 +5,7 @@ set -e
 
 BUILD_DIR=$1
 CACHE_DIR=$2
-APT_DIR=$HOME/vendor/apt
+APT_DIR=$BUILD_DIR/.heroku
 
 function topic() {
   echo "-----> $*"
@@ -50,7 +50,9 @@ topic "Loading cache libgit2"
 cp -r $CACHE_DIR/.libgit2/usr/* $APT_DIR/usr/
 echo $APT_DIR
 ls $APT_DIR/usr/
-ls /app/vendor/apt/usr/lib/pkgconfig/
+ls /app/.heroku/usr/lib/
+ls /app/.heroku/usr/lib/include/
+ls /app/.heroku/usr/lib/pkgconfig/
 
 # debug
 topic "Checking libgit2"
