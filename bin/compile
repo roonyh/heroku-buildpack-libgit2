@@ -24,6 +24,7 @@ hash -r
 # install libgit2
 
 mkdir -p $BUILD_DIR/.libgit2
+mkdir -p $BUILD_DIR/.heroku/usr
 mkdir -p $CACHE_DIR/.libgit2
 mkdir -p $APT_DIR/usr
 
@@ -48,6 +49,7 @@ fi
 
 topic "Loading cache libgit2"
 cp -r $CACHE_DIR/.libgit2/usr/* $APT_DIR/usr/
+cp -r $CACHE_DIR/.libgit2/usr/* $BUILD_DIR/.heroku/usr/
 echo $APT_DIR
 ls $APT_DIR/usr/
 ls /app/.heroku/usr/include/
