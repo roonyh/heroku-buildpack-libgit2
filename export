@@ -1,1 +1,1 @@
-export PKG_CONFIG_PATH=/app/vendor/apt/usr/lib/pkgconfig/:PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/app/.heroku/usr/lib/pkgconfig/:PKG_CONFIG_PATH
